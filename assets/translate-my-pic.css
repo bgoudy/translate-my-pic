@@ -1,0 +1,14 @@
+.header {
+    background-color: azure;
+    text-align: center;
+    height: 20%;
+    width: 100%;
+}
+
+.card{
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
