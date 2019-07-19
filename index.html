@@ -1,88 +1,61 @@
 <!DOCTYPE html>
-<html lang="en-us">
 <head>
-  <meta charset="UTF-8">
-  <title>Translate-A-Pic</title>
+    <meta charset="UTF-8" lang="en/us">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <!--Bootstrap-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../translate-my-pic/translate-my-pic.css">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
 
-  <!--jQuery-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!--JavaScript-->
-  <link src="translate.js" type="text/javascript"></link>
-
+    <link rel="script" href="../translate-my-pic/translate-my-pic.js">
+    <title>Translate-My-Pic</title>
 </head>
-
 <body>
-<div>
-    <div class="jumbotron">
-        <h1 class="display-4, text-center">Translate-a-Pic</h1>
-        <p class="lead, text-center">Upload your image below and we will identify the top five keywords in the language of your choice.</p>
-      </div>
+<div class="header">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Translate-My-pic</h1>
+            <p>Upload any picture you want and the page will identify keywords and then translate the words into the language of your choice.</p>
+        </div>
+    </div>
 </div>
-
-
-<div class="container">
-
-  <!--NEED TO ADD AWS REKOGNITION HERE-->
-  <div class="row">
-  <div class="col-md-6">
-      <div class="form-group">
-          <label>Upload Image</label>
-          <div class="input-group">
-              <span class="input-group-btn">
-                  <span class="btn btn-default btn-file">
-                      Browse… <input type="file" id="imgInp">
-                  </span>
-              </span>
-              <input type="text" class="form-control" readonly>
-          </div>
-          <img id='img-upload'/>
-      </div>
-    </div>
-  </div>
-
-      <!--NEED TO ADD AWS TRANSLATE HERE-->
-      <div class="row">
-      <div class="col-md-6">
-        <p>Select your preferred language in the dropdown below.</p>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Languages
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">German</a>
-              <a class="dropdown-item" href="#">Spanish</a>
-              <a class="dropdown-item" href="#">Italian</a>
-              <a class="dropdown-item" href="#">Chinese</a>
-              <a class="dropdown-item" href="#">Japanese</a>
-            </div>
-          </div>
-      </div>
-    </div>
-
-
-
-<!--card for list of possible words-->
+ 
 <div class="row">
-<div class="col-md-6">
-  <div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush" id="word-matches">
-      <li class="list-group-item">Keyword 1</li>
-      <li class="list-group-item">Keyword 2</li>
-      <li class="list-group-item">Keyword 3</li>
-      <li class="list-group-item">Keyword 4</li>
-      <li class="list-group-item">Keyword 5</li>
-    </ul>
-  </div>
-</div>
+    <div class="col-md-6">
+        <div class="card">
+            <H1>Image Analyzer</H1>
+            <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            <p id="opResult"></p>
+        </div>
+    </div>
+
+
+      <div class="col-md-6">
+        <div class="card">
+          <p>Select your preferred language in the dropdown below.</p>
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#english">English</a>
+            <a href="#chinese">Chinese</a>
+            <a href="#spanish">Spanish</a>
+            <a href="#french">French</a>
+            <a href="#german">German</a>
+          </div>
+          </div>
+         </div>
+    </div>
+    </div>
+    <div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Keyword and Translation</h5>
+              <h6 class="card-subtitle mb-2 text-muted"></h6>
+              <p class="card-text">This is the area where results will populate.</p>
+            </div>
+    </div>
 </div>
 
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
