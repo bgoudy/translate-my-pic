@@ -84,8 +84,8 @@ $(document).ready(function()
                 //
                 //
                 // Put jQuery to update DOM here!
-                $("#keywords").html("<p>" + keywords + "</p>");
-                $("#translation").html("<p>" + translatedKeywords + "</p>");
+                $("#keywords").html("<p> " + keywords + " </p>");
+                $("#translation").html("<p> " + translatedKeywords + " </p>");
             }
             });
     }
