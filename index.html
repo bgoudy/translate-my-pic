@@ -3,18 +3,19 @@
     <meta charset="UTF-8" lang="en/us">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="../translate-my-pic/translate-my-pic.css">
+    <link rel="stylesheet" href="assets/translate-my-pic.css">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
 
-    <link rel="script" href="../translate-my-pic/translate-my-pic.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <title>Translate-My-Pic</title>
 </head>
 <body>
 <div class="header">
     <div class="row">
         <div class="col-md-12">
-            <h1>Translate-My-pic</h1>
-            <p>Upload any picture you want and the page will identify keywords and then translate the words into the language of your choice.</p>
+            <h1>Translate-My-Pic</h1>
+            <p>Upload a picture of an item you want to identify. This app will show you the top 5 keywords in the language of your choice.</p>
         </div>
     </div>
 </div>
@@ -22,18 +23,20 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <H1>Image Analyzer</H1>
+            <h5>Image Analyzer</h5>
             <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
             <p id="opResult"></p>
+            <br>
+            <br>
         </div>
     </div>
 
 
       <div class="col-md-6">
         <div class="card">
-          <p>Select your preferred language in the dropdown below.</p>
+          <h5>Select your preferred language in the dropdown below.</h5>
         <div class="dropdown">
-          <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+          <button onclick="myFunction" class="dropbtn">Dropdown</button>
           <div id="myDropdown" class="dropdown-content">
             <a href="#english">English</a>
             <a href="#chinese">Chinese</a>
@@ -42,20 +45,28 @@
             <a href="#german">German</a>
           </div>
           </div>
+          <br>
+          <br>
          </div>
     </div>
     </div>
+
     <div class="row">
   <div class="col-sm-12">
     <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Keyword and Translation</h5>
-              <h6 class="card-subtitle mb-2 text-muted"></h6>
-              <p class="card-text">This is the area where results will populate.</p>
+              <h5 class="card-title">Keywords & Translations</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Keywords:</h6>
+              <p class="card-text" id="keywords"></p>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted">Translations:</h6>
+              <p class="card-text" id="translation"></p>
+              <br>
             </div>
     </div>
 </div>
 
-
+<script src="assets/translate-my-pic.js"></script>
 </body>
+
 </html>
