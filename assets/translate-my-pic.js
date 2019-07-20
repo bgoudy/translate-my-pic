@@ -84,6 +84,8 @@ $(document).ready(function()
                 //
                 //
                 // Put jQuery to update DOM here!
+                $("#keywords").html("<p> " + keywords + " </p>");
+                $("#translation").html("<p> " + translatedKeywords + " </p>");
             }
             });
     }
@@ -180,8 +182,12 @@ $(document).ready(function()
    window.onclick = function(event) {
     if (!event.target.matches(".dropbtn")) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
+<<<<<<< HEAD
       var i;
       for (i = 0; i < dropdowns.length; i++) {
+=======
+      for (var i = 0; i < dropdowns.length; i++) {
+>>>>>>> 495f9c3ede1695dc4d3fae1e6af668d75e36f7c3
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains("show")) {
           openDropdown.classList.remove("show");
@@ -189,5 +195,22 @@ $(document).ready(function()
       }
     }
    }
+
+   //testing image upload
+   function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageUploaded').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    };
+    };
+
+      $("#fileToUpload").change(function(){
+    readURL(this);
+      });
   });
    
