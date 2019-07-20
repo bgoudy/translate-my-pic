@@ -50,15 +50,17 @@ $(document).ready(function()
         });
     }
 
+    //TESTING OUT ADDING IN OTHER LANGUAGES
     function translateWords(text) {
         AnonLog();
 
         var translate = new AWS.Translate({region: AWS.config.region});
+        var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
 
         var translateParams = {
             Text: text,
             SourceLanguageCode: "en",
-            TargetLanguageCode: "es",
+            TargetLanguageCode: targetDropdown.options[targetDropdown.selectedIndex].text
         };
 
         translate.translateText(translateParams, function(err, data) {
@@ -84,8 +86,11 @@ $(document).ready(function()
                 //
                 //
                 // Put jQuery to update DOM here!
+                
                 $("#keywords").html("<p> " + keywords + " </p>");
+
                 $("#translation").html("<p> " + translatedKeywords + " </p>");
+
             }
             });
     }
