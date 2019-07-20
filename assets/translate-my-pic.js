@@ -103,4 +103,3 @@ document.getElementById("fileToUpload").addEventListener("change", function (eve
       }
     }
    }
-   
