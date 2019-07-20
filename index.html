@@ -1,61 +1,86 @@
 <!DOCTYPE HTML5>
+
 <head>
-    <meta charset="UTF-8" lang="en/us">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta charset="UTF-8" lang="en/us">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/translate-my-pic.css">
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+  <link rel="stylesheet" href="assets/translate-my-pic.css">
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Pic Your Cart</title>
+  <title>translate-My-Pic</title>
 </head>
+
 <body>
-<div class="header">
+  <div class="header">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Pic Your Cart</h1>
-            <p>Upload a picture of an item you want to buy. This app will find you matching and related products from Amazon.</p>
-        </div>
+      <div class="col-md-12">
+        <h1>Pic Your Cart</h1>
+        <p>Upload a picture of an item you want to buy. This app will find you matching and related products from
+          Amazon.</p>
+      </div>
     </div>
-</div>
- 
-<div class="row">
+  </div>
+
+  <div class="row">
     <div class="col-md-6">
-        <div class="card">
-            <H1>Image/Keyword Analyzer</H1>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-            <p id="opResult"></p>
-        </div>
+      <div class="card">
+        <H1>Image/Keyword Analyzer</H1>
+        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+        <p id="opResult"></p>
+      </div>
     </div>
 
 
-      <div class="col-md-6">
-        <div class="card">
-          <p>Select your preferred language in the dropdown below.</p>
+    <div class="col-md-6">
+      <div class="card">
+        <p>Select your preferred language in the dropdown below.</p>
         <div class="dropdown">
-          <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#english">English</a>
-            <a href="#chinese">Chinese</a>
-            <a href="#spanish">Spanish</a>
-            <a href="#french">French</a>
-            <a href="#german">German</a>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div id="myDropdown" class="dropdown-content dropdown-menu">
+            <a class="dropdown-item" href="#english">English</a>
+            <a class="dropdown-item" href="#chinese">Chinese</a>
+            <a class="dropdown-item" href="#spanish">Spanish</a>
+            <a class="dropdown-item" href="#french">French</a>
+            <a class="dropdown-item" href="#german">German</a>
           </div>
-          </div>
-         </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Chinese</a>
+      <a class="dropdown-item" href="#">Spanish</a>
+      <a class="dropdown-item" href="#">French</a>
+      <a class="dropdown-item" href="#">Arabic</a>
+      <a class="dropdown-item" href="#">Hindi</a>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="card" class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cart</h5>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <p class="card-text">This is the area where results will populate.</p>
+        </div>
+      </div>
     </div>
-    <div class="row">
-  <div class="col-sm-12">
-    <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Cart</h5>
-              <h6 class="card-subtitle mb-2 text-muted"></h6>
-              <p class="card-text">This is the area where results will populate.</p>
-            </div>
-    </div>
-</div>
 
-<script src="assets/translate-my-pic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+    <script src="assets/translate-my-pic.js"></script>
 </body>

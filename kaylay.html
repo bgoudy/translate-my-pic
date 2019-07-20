@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" lang="en/us">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/translate-my-pic.css">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Translate-My-Pic</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Translate-My-Pic</h1>
+                <p>Upload a picture of an item you want to identify. This app will show you the top 5 keywords in the
+                    language of your choice.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h5>Image Analyzer</h5>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+                <p id="opResult"></p>
+                <br>
+                <br>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="card">
+                <h5>Select your preferred language in the dropdown below.</h5>
+                <div class="dropdown">
+                    <button onclick="myFunction" class="dropbtn">Dropdown</button>
+                    <!--insert dropdown code here-->
+
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Keywords & Translations</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Keywords:</h6>
+                    <p class="card-text" id="keywords"></p>
+                    <br>
+                    <h6 class="card-subtitle mb-2 text-muted">Translations:</h6>
+                    <p class="card-text" id="translation"></p>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/translate-my-pic.js"></script>
+</body>
+
+</html>
