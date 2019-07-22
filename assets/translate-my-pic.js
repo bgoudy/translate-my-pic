@@ -78,18 +78,33 @@ $(document).ready(function()
                 console.log("Translated Keywords Array: " + translatedKeywords);
                 console.log(translatedKeywords);
 
-                // Put jQuery to update DOM here!
-                //
-                //
-                //
-                //
-                //
-                //
-                // Put jQuery to update DOM here!
-                
-                $("#keywords").html("<p> " + keywords + " </p>");
+                // Creates jQuery DOM elements for Keywords and Translations
+                var keywordsDiv = $("<div>");
+                var translationDiv = $("<div>");
+                var keywordsP = $("<p>");
+                var translationP = $("<p>");
 
-                $("#translation").html("<p> " + translatedKeywords + " </p>");
+                // Resets the Keywords container in DOM and then retrieves the keywords returned from AWS Rekognition
+                $("#keywords").empty();
+                for (i = 0; i < keywords.length; i++)
+                {
+                  $(keywordsP).append(keywords[i]);
+                  $(keywordsDiv).append(keywordsP);
+                  keywordsP = $("<p>");
+                }
+
+                // Resets the Translations container in DOM and then retrieves the translated keywords returned from AWS Translate
+                $("#translation").empty();
+                for (i = 0; i < translatedKeywords.length; i++)
+                {
+                  $(translationP).append(translatedKeywords[i]);
+                  $(translationDiv).append(translationP);
+                  translationP = $("<p>");
+                }
+
+                // Updates the DOM with new containers for Keywords and Translations
+                $("#keywords").html(keywordsDiv);
+                $("#translation").html(translationDiv);
 
             }
             });
