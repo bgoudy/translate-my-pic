@@ -50,15 +50,17 @@ $(document).ready(function()
         });
     }
 
+    //TESTING OUT ADDING IN OTHER LANGUAGES
     function translateWords(text) {
         AnonLog();
 
         var translate = new AWS.Translate({region: AWS.config.region});
+        var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
 
         var translateParams = {
             Text: text,
             SourceLanguageCode: "en",
-            TargetLanguageCode: "es",
+            TargetLanguageCode: targetDropdown.options[targetDropdown.selectedIndex].text
         };
 
         translate.translateText(translateParams, function(err, data) {
@@ -84,6 +86,11 @@ $(document).ready(function()
                 //
                 //
                 // Put jQuery to update DOM here!
+                
+                $("#keywords").html("<p> " + keywords + " </p>");
+
+                $("#translation").html("<p> " + translatedKeywords + " </p>");
+
             }
             });
     }
@@ -174,20 +181,36 @@ $(document).ready(function()
 
 //js for dropdown function.... building from scratch, not using bootstrap
   function myFunction() {
-    document.getElementById('myDropdown').classList.toggle('show');
+    document.getElementById("myDropdown").classList.toggle("show");
    }
    
    window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName('dropdown-content');
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
+    if (!event.target.matches(".dropbtn")) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+        if (openDropdown.classList.contains("show")) {
+          openDropdown.classList.remove("show");
         }
       }
     }
    }
+
+   //testing image upload
+   function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageUploaded').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    };
+    };
+
+      $("#fileToUpload").change(function(){
+    readURL(this);
+      });
   });
    
