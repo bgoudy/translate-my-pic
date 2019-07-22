@@ -52,5 +52,8 @@
    .show {display: block;}
 
    img{
-    max-width:180px;
+        max-width:180px;
+        align-items: center; 
     }
+
+    
