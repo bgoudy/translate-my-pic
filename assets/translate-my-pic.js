@@ -102,7 +102,7 @@ $(document).ready(function()
                   translationP = $("<p>");
                 }
 
-                // Updates the DOM with the new Keywords and Translations containers
+                // Updates the DOM with new containers for Keywords and Translations
                 $("#keywords").html(keywordsDiv);
                 $("#translation").html(translationDiv);
 
