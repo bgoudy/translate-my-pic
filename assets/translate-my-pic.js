@@ -78,6 +78,7 @@ $(document).ready(function()
                 console.log("Translated Keywords Array: " + translatedKeywords);
                 console.log(translatedKeywords);
 
+<<<<<<< HEAD
                 // Creates jQuery DOM elements for Keywords and Translations
                 var keywordsDiv = $("<div>");
                 var translationDiv = $("<div>");
@@ -105,6 +106,20 @@ $(document).ready(function()
                 // Updates the DOM with new containers for Keywords and Translations
                 $("#keywords").html(keywordsDiv);
                 $("#translation").html(translationDiv);
+=======
+                // Put jQuery to update DOM here!
+                //
+                //
+                //
+                //
+                //
+                //
+                // Put jQuery to update DOM here!
+                
+                $("#keywords").html("<p> " + keywords + " </p>");
+
+                $("#translation").html("<p> " + translatedKeywords + " </p>");
+>>>>>>> ec208b168eefdd66a8483de88619326a3bc85ae2
 
             }
             });
@@ -154,6 +169,7 @@ $(document).ready(function()
                 return;
               }
             }
+<<<<<<< HEAD
 
             // Unencode image bytes for AWS Rekognition DetectLabels API 
             var length = image.length;
@@ -189,6 +205,43 @@ $(document).ready(function()
         });
     }
 
+=======
+
+            // Unencode image bytes for AWS Rekognition DetectLabels API 
+            var length = image.length;
+
+            // Vanilla JavaScript method for storing files and other type arrays
+            imageBytes = new ArrayBuffer(length);
+
+            // Turns it into an array of integer values
+            var ua = new Uint8Array(imageBytes);
+            for (var i = 0; i < length; i++) {
+              ua[i] = image.charCodeAt(i);
+            }
+    
+            //Call Rekognition  
+            DetectLabels(imageBytes);
+          };
+        })(file);
+        reader.readAsDataURL(file);
+      }
+
+      function AnonLog() {
+        // Configure the credentials provider to use your identity pool
+        AWS.config.region = 'us-east-2'; // Region
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: 'us-east-2:7359eb59-58a3-4653-98f7-8e4d06680409',
+        });
+        // Make the call to obtain credentials
+        AWS.config.credentials.get(function () {
+          // Credentials will be available when this function is called.
+          var accessKeyId = AWS.config.credentials.accessKeyId;
+          var secretAccessKey = AWS.config.credentials.secretAccessKey;
+          var sessionToken = AWS.config.credentials.sessionToken;
+        });
+    }
+
+>>>>>>> ec208b168eefdd66a8483de88619326a3bc85ae2
     $(document).on('change','#fileToUpload' , function()
     { 
         ProcessImage();

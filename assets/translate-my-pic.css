@@ -50,3 +50,10 @@
    .dropdown a:hover {background-color: #ddd;}
    
    .show {display: block;}
+
+   img{
+        max-width:180px;
+        align-items: center; 
+    }
+
+    
