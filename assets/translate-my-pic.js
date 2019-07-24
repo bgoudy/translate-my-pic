@@ -6,6 +6,33 @@ $(document).ready(function()
     var sourceLanguage = "";
     var targetLanguage = "";
 
+    var languages = [
+      {
+        language: "English",
+        languageCode: "en"
+      },
+      {
+        language: "Spanish",
+        languageCode: "es"
+      },
+      {
+        language: "French",
+        languageCode: "fr"
+      },
+      {
+        language: "Italian",
+        languageCode: "it"
+      },
+      {
+        language: "German",
+        languageCode: "de"
+      },
+      {
+        language: "Portuguese",
+        languageCode: "pt"
+      }
+    ];
+
     // Function to detect labels or keywords in uploaded image (AWS Rekognition API)
     function DetectLabels(imageData) {
 
@@ -56,11 +83,24 @@ $(document).ready(function()
 
         var translate = new AWS.Translate({region: AWS.config.region});
         var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+        var targetDropDownText = targetDropdown.options[targetDropdown.selectedIndex].text;
+        
+        console.log("Dropdown Picker: " + targetDropdown);
+        var targetLanguageCode = "";
+
+        for (i = 0; i < languages.length; i++)
+        { 
+          if (languages[i].language == targetDropDownText)
+          {
+            targetLanguageCode = languages[i].languageCode;
+            console.log("Target Language Code: " + targetLanguageCode);
+          }      
+        }
 
         var translateParams = {
             Text: text,
             SourceLanguageCode: "en",
-            TargetLanguageCode: targetDropdown.options[targetDropdown.selectedIndex].text
+            TargetLanguageCode: targetLanguageCode
         };
 
         translate.translateText(translateParams, function(err, data) {
