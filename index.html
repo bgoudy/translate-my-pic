@@ -23,22 +23,11 @@
 <hr>
 <div class="container">
 <div class="row">
+
     <div class="col-md-6">
         <div class="card">
-            <h5>Image Analyzer</h5>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-            <img id="imageUploaded" src="#" alt="your image" />
-            <br>
-            <br>
-            <br>
-        </div>
-    </div>
-
-
-      <div class="col-md-6">
-        <div class="card">
           <h5>Select your preferred language in the dropdown below.</h5>
-          <select id="targetLanguageCodeDropdown">
+          <select class="ml-3" id="targetLanguageCodeDropdown">
             <option value="es">es</option>
             <option value="fr">fr</option>
             <option value="it">it</option>
@@ -49,21 +38,38 @@
           <br>
          </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <h5>Image Analyzer</h5>
+            <input class="ml-3 mb-2" type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            <img class="ml-3" id="imageUploaded" src="#" alt="your image" />
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+
+  
     </div>
   </div>
 
   <div class="container">
     <div class="row">
-  <div class="col-sm-12">
-    <div class="card">
+  <div class="col-sm-6">
+    <div class="card translation">
             <div class="card-body">
-              <h5 class="card-title">Keywords & Translations</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Keywords:</h6>
+              <h5 class="card-title">Keywords</h5>
               <p class="card-text" id="keywords"></p>
-              <br>
-              <h6 class="card-subtitle mb-2 text-muted">Translations:</h6>
+            </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card translation">
+            <div class="card-body">
+              <h5 class="card-title">Translations</h5>
               <p class="card-text" id="translation"></p>
-              <br>
             </div>
     </div>
 </div>
