@@ -86,21 +86,21 @@ $(document).ready(function()
         var targetDropDownText = targetDropdown.options[targetDropdown.selectedIndex].text;
         
         console.log("Dropdown Picker: " + targetDropdown);
-        var targetLanguageCode = "";
+        var languageCode = "";
 
         for (i = 0; i < languages.length; i++)
         { 
           if (languages[i].language == targetDropDownText)
           {
-            targetLanguageCode = languages[i].languageCode;
-            console.log("Target Language Code: " + targetLanguageCode);
+            languageCode = languages[i].languageCode;
+            console.log("Target Language Code: " + languageCode);
           }      
         }
 
         var translateParams = {
             Text: text,
             SourceLanguageCode: "en",
-            TargetLanguageCode: targetLanguageCode
+            TargetLanguageCode: languageCode
         };
 
         translate.translateText(translateParams, function(err, data) {
