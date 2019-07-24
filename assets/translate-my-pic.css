@@ -26,9 +26,11 @@
    }
    
    .dropdown {
+    width: 50%; 
     position: relative;
     display: inline-block;
    }
+   
    
    .dropdown-content {
     display: none;
@@ -56,4 +58,6 @@
         align-items: center; 
     }
 
-    
+   #imageUploaded{
+       justify-content: center;
+   } 
