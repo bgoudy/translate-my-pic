@@ -22,9 +22,13 @@
  
 <hr>
 <div class="container">
+ 
 <div class="row">
     <div class="col-md-6">
+        
         <div class="card">
+          <div id="img-selector"></div>
+            <div id="img-popup">Image Goes Here!</div>
             <h5>Image Analyzer</h5>
             <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
             <img id="imageUploaded" src="#" alt="your image" />
@@ -36,8 +40,10 @@
 
 
       <div class="col-md-6">
+        
         <div class="card">
-          <h5>Select your preferred language in the dropdown below.</h5>
+          <div id="lang"></div> 
+            <div id="pop-up">Preferred Language</div>         <h5>Select your preferred language in the dropdown below.</h5>
           <select id="targetLanguageCodeDropdown">
             <option value="es">es</option>
             <option value="fr">fr</option>
