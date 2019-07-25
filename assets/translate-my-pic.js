@@ -277,7 +277,7 @@ $(document).ready(function()
       $(lang).mouseover(function(){
       $(langPopUp).show();
         var popper = new Popper(lang, langPopUp, {
-          placement: "right"
+          placement: "bottom"
         })
       });
       var imgCard = document.getElementById("img-selector");
@@ -287,7 +287,8 @@ $(document).ready(function()
       $(imgCard).mouseover(function(){
       $(imgPopUp).show();
         var popper = new Popper(imgCard, imgPopUp, {
-          placement: "bottom"
+          placement: "bottom"            
+          
         });
       });
   });
