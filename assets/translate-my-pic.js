@@ -282,12 +282,12 @@ $(document).ready(function()
       });
       var imgCard = document.getElementById("img-selector");
       var imgPopUp = document.getElementById("img-popup");
-      //imgPopUp.hide();
+  
 
       $(imgCard).mouseover(function(){
       $(imgPopUp).show();
         var popper = new Popper(imgCard, imgPopUp, {
-          placement: "left"
+          placement: "bottom"
         });
       });
   });
