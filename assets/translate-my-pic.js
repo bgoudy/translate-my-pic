@@ -242,7 +242,8 @@ $(document).ready(function()
    window.onclick = function(event) {
     if (!event.target.matches(".dropbtn")) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains("show")) {
           openDropdown.classList.remove("show");
@@ -266,6 +267,29 @@ $(document).ready(function()
 
       $("#fileToUpload").change(function(){
     readURL(this);
+      });
+
+
+      var lang = document.getElementById("lang");
+      var langPopUp = document.getElementById("pop-up");
+      //langPopUp.hide();
+
+      $(lang).mouseover(function(){
+      $(langPopUp).show();
+        var popper = new Popper(lang, langPopUp, {
+          placement: "bottom"
+        })
+      });
+      var imgCard = document.getElementById("img-selector");
+      var imgPopUp = document.getElementById("img-popup");
+  
+
+      $(imgCard).mouseover(function(){
+      $(imgPopUp).show();
+        var popper = new Popper(imgCard, imgPopUp, {
+          placement: "bottom"            
+          
+        });
       });
   });
    
