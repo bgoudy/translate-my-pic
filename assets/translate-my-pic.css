@@ -12,6 +12,10 @@
     margin: 0px;
     padding: 0px;
 }
+
+.translation {
+    height: auto !important;
+}
     .dropbtn {
     background-color: #3498DB;
     color: white;
@@ -58,6 +62,12 @@
         align-items: center; 
     }
 
+<<<<<<< HEAD
    #imageUploaded{
        justify-content: center;
    } 
+=======
+    #targetLanguageCodeDropdown {
+        width: 50%;
+        }
+>>>>>>> dc856d7e9eeadde75b8b68b6b2755534e90668c7
