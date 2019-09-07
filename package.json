@@ -27,5 +27,6 @@
     "router": "^1.3.3",
     "sequelize": "^5.18.2",
     "sequelize-cli": "^5.5.1"
-  }
+  },
+  "devDependencies": {}
 }

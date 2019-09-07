@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8" lang="en/us">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- MATERIALIZE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- MATERIALIZE JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./assets/css/translate-my-pic.css">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -25,14 +32,13 @@
     <form class="form-horizontal" action='' method="POST">
         <fieldset>
           <div id="legend">
-            <legend class="">Register</legend>
+            <legend id="register">Register</legend>
           </div>
           <div class="control-group">
             <!-- Username -->
             <label class="control-label"  for="username">Username</label>
             <div class="controls">
-              <input type="text" id="username" name="username" placeholder="" class="input-large">
-              <p class="help-block">Please create a username</p>
+              <input type="text" id="username" name="username" placeholder="Please create a user name">
             </div>
           </div>
        
@@ -40,8 +46,7 @@
             <!-- E-mail -->
             <label class="control-label" for="email">E-Mail</label>
             <div class="controls">
-              <input type="text" id="email" name="email" placeholder="" class="input-large">
-              <p class="help-block">Please enter your email address</p>
+              <input type="text" id="email" name="email" placeholder="Please enter your email address">
             </div>
           </div>
        
@@ -49,8 +54,7 @@
             <!--Password-->
             <label class="control-label" for="password">Password</label>
             <div class="controls">
-              <input type="password" id="password" name="password" placeholder="" class="input-large">
-              <p class="help-block">Password should be at least 8 characters</p>
+              <input type="password" id="password" name="password" placeholder="Password should be at least 8 characters">
             </div>
           </div>
        
@@ -58,8 +62,7 @@
             <!--Confirm Password-->
             <label class="control-label"  for="password_confirm">Password (Confirm)</label>
             <div class="controls">
-              <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-large">
-              <p class="help-block">Please confirm password</p>
+              <input type="password" id="password_confirm" name="password_confirm" placeholder="Please confirm password">
             </div>
           </div>
        
