@@ -1,6 +1,6 @@
 // This is the model for each user in the User table of the Translate database
 // There are four user specified fields: first name, last name, email, and password
-// There three system managed fields: id, createdAt, and updatedAt
+// There are three system managed fields: id, createdAt, and updatedAt
 
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("User", {
