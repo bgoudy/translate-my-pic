@@ -25,12 +25,18 @@
     background-color: white;
 }
 #register {
+    color: darkblue;
+    font-family: 'Merriweather Sans', sans-serif;
     font-size: medium;
 }
 .control-label {
     color: darkblue;
-    font-size: medium;
+    font-size: small;
     font-family: 'Merriweather Sans', sans-serif;
+}
+
+#username, #email, #password, #password_confirm {
+    font-size: small;
 }
 .translation {
     height: auto !important;
