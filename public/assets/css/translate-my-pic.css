@@ -76,7 +76,20 @@
     }
     #targetLanguageCodeDropdown {
         width: 50%;
-        }
+    }
+
+    h1 {
+        background-color: rgb(1, 1, 70) !important;
+        color: gainsboro !important;
+        margin-bottom: 15px;
+        border-bottom: 5px;
+        border-bottom-color: black;
+        text-align: center;
+        height: 20%;
+        width: 100%;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
     p {
         font-weight: bold;
         font-family: 'Times New Roman', Times, serif;
