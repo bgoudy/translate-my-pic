@@ -1,11 +1,9 @@
 // Required dependencies and packages
-var express = require("express");
-var router = express.Router();
 var db = require("../models");
 
 // Routes
 // This route will perform a POST request to create a new user
-router.post("/users", function (req, res)
+exports.createUser = function (req, res)
 {
     db.User.create(
     {
@@ -17,10 +15,10 @@ router.post("/users", function (req, res)
     {
         res.json(dbTranslate);
     })
-});
+};
 
 // This route will perform a GET request to authenticate the user so he can log in
-router.get("/auth", function (req, res)
+exports.authUser = function (req, res)
 {
     db.User.findOne(
     {
@@ -49,19 +47,19 @@ router.get("/auth", function (req, res)
             });
         }
     });
-});
+};
 
 // This route performs a GET request to retrieve all translations
-router.get("/translations", function(req, res)
+exports.getTranslations = function(req, res)
 {
     db.Translation.findAll({}).then(function(dbTranslate)
     {
         res.json(dbTranslate); // Returns a JSON array of all translations
     });
-});
+};
 
 // This route performs a POST request to create a new translation record
-router.post("/translations", function(req, res)
+exports.createTranslation = function(req, res)
 {
     db.Translation.create(
     {
@@ -77,7 +75,4 @@ router.post("/translations", function(req, res)
             "Outcome Message": "Translation has been saved."
         });
     });
-});
-
-// Exports the translate-my-pic-plus API routes
-module.exports = router;
+};
