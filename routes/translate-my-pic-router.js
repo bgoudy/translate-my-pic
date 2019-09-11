@@ -17,5 +17,8 @@ router.get("/translations", translateController.getTranslations);
 // This route performs a POST request to create a new translation record
 router.post("/translations", translateController.createTranslation);
 
+// This route performs a PUT request to delete a translation record
+router.put("/translations", translateController.deleteTranslation);
+
 // Exports the translate-my-pic-plus API routes
 module.exports = router;

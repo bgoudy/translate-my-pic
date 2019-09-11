@@ -2,7 +2,7 @@
 var db = require("../models");
 
 // Routes
-// This route will perform a POST request to create a new user
+// Creates a new user record in the Users database
 exports.createUser = function (req, res)
 {
     db.User.create(
@@ -17,15 +17,15 @@ exports.createUser = function (req, res)
     })
 };
 
-// This route will perform a GET request to authenticate the user so he can log in
+// Authenticates a user during the log in process by comparing the username and password provided in the request
 exports.authUser = function (req, res)
 {
     db.User.findOne(
     {
         where:
         {
-            email: req.body.email,
-            password: req.body.password
+            email: req.query.email,
+            password: req.query.password
         }
     }).then(function(dbTranslate)
     {
@@ -33,7 +33,7 @@ exports.authUser = function (req, res)
         {
             res.json(
             {
-                "Outcome Code": 401,
+                "Code": 401,
                 "Message": "Incorrect email or password."
             });
         }
@@ -41,24 +41,31 @@ exports.authUser = function (req, res)
         {
             res.json(
             {
-                "Outcome Code": 200,
-                "Outcome Message": "Authentication successful.",
+                "Code": 200,
+                "Message": "Authentication successful.",
                 "Token": dbTranslate.id
             });
         }
     });
 };
 
-// This route performs a GET request to retrieve all translations
+// Retrieves all translations not deleted for a user in the Translations table of the database
 exports.getTranslations = function(req, res)
 {
-    db.Translation.findAll({}).then(function(dbTranslate)
+    db.Translation.findAll(
+    {
+        where: 
+        {
+            user_id: req.body.user_id,
+            deleted: false
+        }
+    }).then(function(dbTranslate)
     {
         res.json(dbTranslate); // Returns a JSON array of all translations
     });
 };
 
-// This route performs a POST request to create a new translation record
+// Creates a new translation record in the Translations table of the database
 exports.createTranslation = function(req, res)
 {
     db.Translation.create(
@@ -71,8 +78,34 @@ exports.createTranslation = function(req, res)
     {
         res.json(
         {
-            "Outcome Code": 200,
-            "Outcome Message": "Translation has been saved."
+            "Code": 200,
+            "Message": "Translation has been saved."
         });
+    });
+};
+
+// Marks a translation as deleted in the Translations table of the database
+exports.deleteTranslation = function(req, res)
+{
+    db.Translation.update(
+    {
+        deleted: true,
+    },
+    {
+    where: 
+    {
+        id: req.body.translation_id,
+        user_id: req.body.user_id
+    }
+    }).then(function(dbTranslate)
+    {
+        res.json(
+        {
+            "Code": 200,
+            "Message": "Translation has been deleted.",
+            "Translation ID": req.body.translation_id,
+            "User ID": req.body.user_id
+        }
+        ); // Returns a JSON array of all translations
     });
 };
