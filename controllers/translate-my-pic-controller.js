@@ -24,8 +24,8 @@ exports.authUser = function (req, res)
     {
         where:
         {
-            email: req.body.email,
-            password: req.body.password
+            email: req.query.email,
+            password: req.query.password
         }
     }).then(function(dbTranslate)
     {
@@ -33,7 +33,7 @@ exports.authUser = function (req, res)
         {
             res.json(
             {
-                "Outcome Code": 401,
+                "Code": 401,
                 "Message": "Incorrect email or password."
             });
         }
@@ -41,8 +41,8 @@ exports.authUser = function (req, res)
         {
             res.json(
             {
-                "Outcome Code": 200,
-                "Outcome Message": "Authentication successful.",
+                "Code": 200,
+                "Message": "Authentication successful.",
                 "Token": dbTranslate.id
             });
         }
@@ -78,8 +78,8 @@ exports.createTranslation = function(req, res)
     {
         res.json(
         {
-            "Outcome Code": 200,
-            "Outcome Message": "Translation has been saved."
+            "Code": 200,
+            "Message": "Translation has been saved."
         });
     });
 };
@@ -92,17 +92,17 @@ exports.deleteTranslation = function(req, res)
         deleted: true,
     },
     {
-        where: 
-        {
-            id: req.body.translation_id,
-            user_id: req.body.user_id
-        }
+    where: 
+    {
+        id: req.body.translation_id,
+        user_id: req.body.user_id
+    }
     }).then(function(dbTranslate)
     {
         res.json(
         {
-            "Outcome Code": 200,
-            "Outcome Message": "Translation has been deleted.",
+            "Code": 200,
+            "Message": "Translation has been deleted.",
             "Translation ID": req.body.translation_id,
             "User ID": req.body.user_id
         }
