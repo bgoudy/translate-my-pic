@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" lang="en/us">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+    <link rel="stylesheet" href="../public/assets/css/translate-my-pic.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans&display=swap" rel="stylesheet">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Translate-My-Pic</title>
+</head>
+<body>
+<div class="header">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Translate-My-Pic</h1>
+            
+            <p>Upload a picture of an item you want to identify. This app will show you the top 5 keywords in the language of your choice.</p>
+              
+          </div>
+    </div>
+</div>
+ 
+
+<div class="container">
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card" id="lang">
+            <div id="pop-up">Preferred Language</div>
+            
+          <h5>Select your preferred language in the dropdown below.</h5>
+          <select class="ml-3" id="targetLanguageCodeDropdown">
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="it">Italian</option>
+            <option value="de">German</option>
+            <option value="pt">Portuguese</option>
+      </select>
+          <br>
+          <br>
+         </div>
+    </div>
+
+    <div class="col-md-6">
+      
+        <div class="card" id="img-selector">
+            <div id="img-popup">Put Image Here</div>
+            <h5>Image Analyzer</h5>
+            <input class="ml-3 mb-2" type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            <img class="ml-3" id="imageUploaded" src="#" alt="your image" />
+            <br>
+            <br>
+            <br>
+          </div>
+        
+      </div>
+    
+        
+        </div>
+    </div>
+    </div>
+  
+
+  <div class="container">
+    <div class="row">
+  <div class="col-sm-6">
+    <div class="card translation">
+            <div class="card-body">
+              <h5 class="card-title">Keywords</h5>
+              <p class="card-text" id="keywords"></p>
+            </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card translation">
+            <div class="card-body">
+              <h5 class="card-title">Translations</h5>
+              <p class="card-text" id="translation"></p>
+            </div>
+    </div>
+</div>
+</div>
+
+
+<script src="../public/assets/js/translate-my-pic.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
