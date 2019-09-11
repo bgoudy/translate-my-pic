@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" lang="en/us">
+    
+    <!-- MATERIALIZE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    <!-- MATERIALIZE JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/translate-my-pic.css">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Translate-My-Pic</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="row, text-center">
+            <div class="col-md-12">
+                <h2>Translate-My-Pic</h2>
+              </div>
+        </div>
+    </div>
+
+    <!--beginning the form for registration-->
+            <form class="form" action='' method="POST">
+                <fieldset>
+                    <div id="legend">
+                        <legend id="register">Registration</legend>
+                    </div>
+
+          <div class="row">
+            <div class="control-group">
+                <!-- Username -->
+                <label class="control-label"  for="username">Username</label>
+                <div class="controls">
+                  <input type="text" id="username" name="username" placeholder="Please create a user name">
+                </div>
+              </div>
+       
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">E-Mail</label>
+            <div class="controls">
+              <input type="text" id="email" name="email" placeholder="Please enter your email address">
+            </div>
+          </div>
+       
+          <div class="control-group">
+            <!--Password-->
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+              <input type="password" id="password" name="password" placeholder="Password should be at least 8 characters">
+            </div>
+          </div>
+       
+          <div class="control-group">
+            <!--Confirm Password-->
+            <label class="control-label"  for="password_confirm">Confirm Password</label>
+            <div class="controls">
+              <input type="password" id="password_confirm" name="password_confirm" placeholder="Please confirm password">
+            </div>
+          </div>
+       
+          <div class="control-group">
+            <!--Submit Button Using Materialize-->
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+
+</div>
+
+<!--adding JS link at bottom of page for Materialize as stated in the documentation-->
+<script type="text/javascript" src="../../../School/materialize/js/materialize.min.js"></script>
+</body>
+</html>
