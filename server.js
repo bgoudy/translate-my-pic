@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static(process.cwd() + "/public"));
 
 // Require routes HTML pages and APIs
-var routes = require("./controllers/translate-my-pic-controller");
+var routes = require("./routes/translate-my-pic-router.js");
 
 app.use("/", routes);
 
