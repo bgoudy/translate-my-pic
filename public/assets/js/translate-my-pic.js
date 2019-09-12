@@ -292,4 +292,3 @@ $(document).ready(function()
         });
       });
   });
-   
