@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "kayleypassword",
+    "password": "abcd1234",
     "database": "translate_db",
     "host": "localhost",
     "port": 3306,
