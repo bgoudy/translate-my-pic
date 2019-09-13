@@ -1,5 +1,29 @@
 $(document).ready(function()
 {
+  // This function is used to retrieve the value in the user_id cookie set during log in
+  function getCookie(cookieName)
+  {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie); // Retrieves cookie string from browser cookies by decoding it
+    var ca = decodedCookie.split(';'); // Creates an array of all name/value pairs in the cookie string
+    
+    // For loop which iterates through the cookies array to find the desired cookie value
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  
+  // This is the User ID retrieved from the cookie; it is used to retrieve the translation history
+  var userId = getCookie("user_id");
+
+    console.log("User ID: " + userId);
 
     var keywords = [];
     var translatedKeywords = [];
