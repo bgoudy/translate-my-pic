@@ -365,6 +365,7 @@ $(document).ready(function()
           
         });
       });
+ 
     getTranslationHistory(getCookie("user_id"));
   });
    
