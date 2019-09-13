@@ -35,7 +35,7 @@
     font-family: 'Merriweather Sans', sans-serif;
 }
 
-.form {
+#registration-form {
     background-color: white;
 }
 #register {
@@ -49,9 +49,10 @@
     font-family: 'Merriweather Sans', sans-serif;
 }
 
-#username, #email, #password, #password_confirm {
+#username, #email, #password, #confirm-password {
     font-size: small;
 }
+
 .translation {
     height: auto !important;
 }
@@ -120,12 +121,17 @@ h1 {
     text-align: center;
     height: 20%;
     width: 100%;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+h3 {
+    color: white;
+    background-color: rgb(1, 1, 70) !important;
 }
 
 p {
     font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Merriweather Sans', sans-serif;
     line-height: 36px;
 }
 
