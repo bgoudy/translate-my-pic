@@ -21,8 +21,8 @@ var routes = require("./routes/translate-my-pic-router.js");
 app.use("/", routes);
 
 // Synchonizes the Sequelize models and then starts up the application
-db.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on Port: " + PORT);
+db.sequelize.sync({ force: false }).then(function () {
+  app.listen(PORT, function () {
+    console.log("App listening carefully on Port: " + PORT);
   });
 });
