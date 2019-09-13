@@ -1,12 +1,25 @@
 .header {
-    background-color: rgb(1, 1, 70);
+    background-color: #1A237E;
     color: white;
-    margin-bottom: 15px;
-    border-bottom: 5px;
+    /*margin-bottom: 15px;*/
+    /*border-bottom: 5px;
+    padding-top: 5px;
+    /*padding-bottom: 10px;*/
     text-align: center;
+    line-height: 30px;
     height: 20%;
     width: 100%;
     font-family: 'Merriweather Sans', sans-serif;
+}
+
+.header h5 {
+    font-size: 18px;
+    line-height: 30px;
+    margin-top: 10px !important;
+}
+
+.container {
+    margin-top: 20px;
 }
 
 .card{
@@ -16,8 +29,9 @@
     margin: 0px;
     padding: 20px;
     border-width: 5px;
+    box-shadow: #BDBDBD;
     border-color: white;
-    background-color: rgb(154, 167, 180);
+    background-color: white;
     font-family: 'Merriweather Sans', sans-serif;
 }
 
@@ -91,7 +105,7 @@ img{
 }
 
 body{
-    background-color: rgb(154, 167, 180);
+    background-color: #BDBDBD;
 }
    
 #targetLanguageCodeDropdown {
@@ -99,7 +113,7 @@ body{
 }
 
 h1 {
-    background-color: rgb(1, 1, 70) !important;
+    background-color: #1A237E !important;
     color: gainsboro !important;
     margin-bottom: 15px;
     border-bottom: 5px;
@@ -122,3 +136,55 @@ p {
 }
 
 
+/* Inactive/Active Default input field color */
+.input-field input[type]:not([readonly]),
+.input-field input[type]:focus:not([readonly]),
+.input-field textarea:not([readonly]),
+.input-field textarea:focus:not([readonly]) {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 slategrey;
+}
+
+/* Inactive/Active Default input label color */
+.input-field input[type]:focus:not([readonly])+label,
+.input-field textarea:focus:not([readonly])+label {
+    color: black;
+}
+
+/* Active/Inactive Invalid input field colors */
+.input-field input[type].invalid,
+.input-field input[type].invalid:focus,
+.input-field textarea.invalid,
+.input-field textarea.invalid:focus {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 slategrey;
+}
+
+/* Active/Inactive Invalid input label color */
+.input-field input[type].invalid:focus+label,
+.input-field input[type].invalid~.helper-text::after,
+.input-field input[type].invalid:focus~.helper-text::after, 
+.input-field textarea.invalid:focus+label,
+.input-field textarea.invalid~.helper-text::after,
+.input-field textarea.invalid:focus~.helper-text::after {
+    color: black;
+}
+
+/* Active/Inactive Valid input field color */
+.input-field input[type].valid,
+.input-field input[type].valid:focus,
+.input-field textarea.valid,
+.input-field textarea.valid:focus {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 slategrey;
+}
+
+/* Active/Inactive Valid input label color */
+.input-field input[type].valid:focus+label,
+.input-field input[type].valid~.helper-text::after,
+.input-field input[type].valid:focus~.helper-text::after,
+.input-field textarea.valid:focus+label,
+.input-field textarea.valid~.helper-text::after,
+.input-field textarea.valid:focus~.helper-text::after {
+    color: black;
+}
