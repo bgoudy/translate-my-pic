@@ -13,7 +13,23 @@ exports.createUser = function (req, res)
         password: req.body.password
     }).then(function(dbTranslate)
     {
-        res.json(dbTranslate);
+        if(dbTranslate.id =! null)
+        {
+            res.json(
+            {
+                "Code": 200,
+                "Message": "Account creation successful.",
+                "Token": dbTranslate.id
+            });
+        }
+        else
+        {
+            res.json(
+            {
+                "Code": 401,
+                "Message": "Incorrect email or password."
+            });
+        }
     })
 };
 
