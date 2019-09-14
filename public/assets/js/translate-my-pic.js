@@ -1,5 +1,79 @@
 $(document).ready(function()
 {
+  // Global variables
+  var relativeURL = window.location.origin;
+
+  // This function is used to retrieve the value in the user_id cookie set during log in
+  function getCookie(cookieName)
+  {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie); // Retrieves cookie string from browser cookies by decoding it
+    var ca = decodedCookie.split(';'); // Creates an array of all name/value pairs in the cookie string
+    
+    // For loop which iterates through the cookies array to find the desired cookie value
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  // This function retrieves all of the previous translations for a logged in user
+  function getTranslationHistory(user)
+  { 
+    $.ajax(
+      {
+        method: "GET",
+        url: relativeURL + "/translations",
+        data:
+        {
+          "user_id": user
+        }
+      }).done(function(data)
+      {
+        console.log(data);
+
+        for(i = 0; i < data.length; i++)
+        {
+          console.log("Translation ID: " + data[i].id);
+          console.log("Translated Language: " + data[i].translated_language);
+          console.log("Analyzed Keywords: " + data[i].analyzed_keywords);
+          console.log("Translated Keywords: " + data[i].translated_keywords + "\n");
+
+          var transLangDiv = $("<div>");
+          var analyzedKeywordsDiv = $("<div>");
+          var transKeywordsDiv = $("<div>");
+          var deleteButtonDiv = $("<div>");
+          var deleteButton = $("<button>");
+
+          deleteButton.attr(
+          {
+            "type": "submit",
+            "class": "btn btn-primary",
+            "value": "Delete"
+          });
+          
+          deleteButton.text("Delete");
+          deleteButtonDiv.append(deleteButton);
+
+          transLangDiv.text(data[i].translated_language);
+          analyzedKeywordsDiv.text(data[i].analyzed_keywords);
+          transKeywordsDiv.text(data[i].translated_keywords);
+
+          $("#t-language").append(transLangDiv);
+          $("#a-keywords").append(analyzedKeywordsDiv);
+          $("#t-keywords").append(transKeywordsDiv);
+          $("#delete-button").append(deleteButtonDiv);
+
+        }
+
+      });
+  }
 
     var keywords = [];
     var translatedKeywords = [];
@@ -291,5 +365,7 @@ $(document).ready(function()
           
         });
       });
+ 
+    getTranslationHistory(getCookie("user_id"));
   });
    

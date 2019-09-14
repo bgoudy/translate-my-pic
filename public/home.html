@@ -3,7 +3,7 @@
     <meta charset="UTF-8" lang="en/us">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
-    <link rel="stylesheet" href="../public/assets/css/translate-my-pic.css">
+    <link rel="stylesheet" href="assets/css/translate-my-pic.css">
     
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans&display=swap" rel="stylesheet">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
@@ -17,8 +17,8 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Translate-My-Pic</h1>
-            
-            <p>Upload a picture of an item you want to identify. This app will show you the top 5 keywords in the language of your choice.</p>
+            <br>
+            <h5>Upload a picture of an item you want to identify. This app will show you the top 5 keywords in the language of your choice.</h5>
               
           </div>
     </div>
@@ -84,9 +84,47 @@
     </div>
 </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card translation mt-4">
+      <div class="card-body">
+        <h5 class="card-title mt-1">Translation History</h5>
+        <div class="card-text" id="translation-history">
+          <div class="row">
+            <div class="col-md-3 text-left">
+              <p>Translated Language</p>
+              <div id="t-language">
+
+              </div>
+            </div>
+            <div class="col-md-3 text-left">
+              <p>Analyzed Keywords</p>
+              <div id="a-keywords">
+
+              </div>
+            </div>
+            <div class="col-md-3 text-left">
+              <p>Translated Keywords</p>
+              <div id="t-keywords">
+
+              </div>
+            </div>
+            <div class="col-md-3 text-left">
+                <p>Delete?</p>
+                <div id="delete-button">
+  
+                </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<script src="../public/assets/js/translate-my-pic.js"></script>
+<script src="assets/js/translate-my-pic.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
