@@ -56,7 +56,7 @@ exports.getTranslations = function(req, res)
     {
         where: 
         {
-            user_id: req.body.user_id,
+            user_id: req.query.user_id,
             deleted: false
         }
     }).then(function(dbTranslate)
