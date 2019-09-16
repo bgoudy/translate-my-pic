@@ -335,13 +335,7 @@ $(document).ready(function()
         }
 
         reader.readAsDataURL(input.files[0]);
-    }
-
-    else {
-      $('#imageUploaded').on('error', function () {
-        $(this).remove();
-    })
-    }
+    };
     };
 
       $("#fileToUpload").change(function(){

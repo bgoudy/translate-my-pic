@@ -49,7 +49,7 @@
     font-family: 'Merriweather Sans', sans-serif;
 }
 
-#username, #email, #password, #confirm-password {
+#email, #confirm-email, #password, #confirm-password {
     font-size: small;
 }
 
