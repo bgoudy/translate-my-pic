@@ -2,8 +2,8 @@ $(document).ready(function()
 {
   // Global variables
   var relativeURL = window.location.origin;
-  var keywords = [];
-  var translatedKeywords = [];
+  //var keywords = [];
+  //var translatedKeywords = [];
   var sourceLanguage = "";
   var targetLanguage = "";
 
@@ -57,7 +57,9 @@ $(document).ready(function()
   // This function retrieves all of the previous translations for a logged in user
   function getTranslationHistory(user)
   { 
-    $.ajax(
+    if(getCookie("user_id") != "")
+    {
+      $.ajax(
       {
         method: "GET",
         url: relativeURL + "/translations",
@@ -100,10 +102,43 @@ $(document).ready(function()
           $("#a-keywords").append(analyzedKeywordsDiv);
           $("#t-keywords").append(transKeywordsDiv);
           $("#delete-button").append(deleteButtonDiv);
-
         }
-
       });
+    }
+
+    // Hides the translation history container if the user is not logged (or anonymous)
+    else
+    {
+      $("#translation-history-container").hide();
+    }
+  }
+
+  // Function to add recent translation to translation history
+  function addTranslation(user, language, keywords, translatedKeywords)
+  {
+
+    $.ajax(
+    {
+      method: "POST",
+      url: relativeURL + "/translations",
+      data:
+      {
+        "user_id": user,
+        "translated_language": language,
+        "analyzed_keywords": keywords.join(", "),
+        "translated_keywords": translatedKeywords.join(", "),
+      }
+    }).done(function(data)
+    {
+      console.log("Translation added to translation history!");
+      
+      $("#t-language").empty();
+      $("#a-keywords").empty();
+      $("#t-keywords").empty();
+      $("#delete-button").empty();
+
+      getTranslationHistory(getCookie("user_id"));
+    });
   }
 
   // Function to detect labels or keywords in uploaded image (AWS Rekognition API)
@@ -219,6 +254,18 @@ $(document).ready(function()
               $("#keywords").html(keywordsDiv);
               $("#translation").html(translationDiv);
 
+              // Checks to see if a cookie has been sent for user_id
+              // If no cookie is set, then the user_id is set to anonymous for the translation in the database
+              if (getCookie("user_id") == "")
+              {
+                addTranslation("Anonymous", targetDropDownText, keywords, translatedKeywords);
+              }
+              
+              // If a cookie is set, then the user_id us set to that cookie value for the translation in the database 
+              else
+              {
+                addTranslation(getCookie("user_id"), targetDropDownText, keywords, translatedKeywords);
+              }
           }
           });
   }
