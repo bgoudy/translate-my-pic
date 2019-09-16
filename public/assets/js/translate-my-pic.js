@@ -87,8 +87,9 @@ $(document).ready(function()
           deleteButton.attr(
           {
             "type": "submit",
-            "class": "btn btn-primary",
-            "value": "Delete"
+            "class": "btn btn-primary del-btn",
+            "value": "Delete",
+            "id": data[i].id
           });
           
           deleteButton.text("Delete");
@@ -138,6 +139,24 @@ $(document).ready(function()
       $("#delete-button").empty();
 
       getTranslationHistory(getCookie("user_id"));
+    });
+  }
+
+  // Function to delete translations from a user's translation history
+  function deleteTranslation(user, translation)
+  {
+    $.ajax(
+    {
+      method: "PUT",
+      url: relativeURL + "/translations",
+      data:
+      {
+        translation_id: translation,
+        user_id: user
+      }
+    }).done(function(data)
+    {
+      console.log("Translation has been deleted.");
     });
   }
 
@@ -423,5 +442,23 @@ $(document).ready(function()
  
   // Invocation of getTranslationHistory function when page loads
   getTranslationHistory(getCookie("user_id"));
+
+  // jQuery listener to delete translation in translation history 
+  $("#delete-button").on("click", ".del-btn", function()
+  { 
+    event.preventDefault();
+    
+    // Deletes the translation associated with the delete button clicked
+    deleteTranslation(getCookie("user_id"), parseInt($(this).attr("id")));
+
+    // Clears translation history container so that it can be refreshed after deletion
+    $("#t-language").empty();
+    $("#a-keywords").empty();
+    $("#t-keywords").empty();
+    $("#delete-button").empty();
+
+    // Refreshes translation history container after deletion
+    getTranslationHistory(getCookie("user_id"));
   });
+});
    
