@@ -2,6 +2,37 @@ $(document).ready(function()
 {
   // Global variables
   var relativeURL = window.location.origin;
+  var keywords = [];
+  var translatedKeywords = [];
+  var sourceLanguage = "";
+  var targetLanguage = "";
+
+  var languages = [
+    {
+      language: "English",
+      languageCode: "en"
+    },
+    {
+      language: "Spanish",
+      languageCode: "es"
+    },
+    {
+      language: "French",
+      languageCode: "fr"
+    },
+    {
+      language: "Italian",
+      languageCode: "it"
+    },
+    {
+      language: "German",
+      languageCode: "de"
+    },
+    {
+      language: "Portuguese",
+      languageCode: "pt"
+    }
+  ];
 
   // This function is used to retrieve the value in the user_id cookie set during log in
   function getCookie(cookieName)
@@ -74,38 +105,6 @@ $(document).ready(function()
 
       });
   }
-
-    var keywords = [];
-    var translatedKeywords = [];
-    var sourceLanguage = "";
-    var targetLanguage = "";
-
-    var languages = [
-      {
-        language: "English",
-        languageCode: "en"
-      },
-      {
-        language: "Spanish",
-        languageCode: "es"
-      },
-      {
-        language: "French",
-        languageCode: "fr"
-      },
-      {
-        language: "Italian",
-        languageCode: "it"
-      },
-      {
-        language: "German",
-        languageCode: "de"
-      },
-      {
-        language: "Portuguese",
-        languageCode: "pt"
-      }
-    ];
 
     // Function to detect labels or keywords in uploaded image (AWS Rekognition API)
     function DetectLabels(imageData) {
