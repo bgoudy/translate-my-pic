@@ -21,7 +21,7 @@ $(document).ready(function()
     $("#submit-button").on("click", function(event)
     {
         // Set the userEmail variable after clicking submit
-        userEmail = $("#username").val();
+        userEmail = $("#email").val();
         console.log("Email entered by user:" + userEmail);
 
         // Set the userPassword variable after clicking submit

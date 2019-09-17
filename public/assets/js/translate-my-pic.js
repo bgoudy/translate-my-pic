@@ -2,6 +2,37 @@ $(document).ready(function()
 {
   // Global variables
   var relativeURL = window.location.origin;
+  //var keywords = [];
+  //var translatedKeywords = [];
+  var sourceLanguage = "";
+  var targetLanguage = "";
+
+  var languages = [
+    {
+      language: "English",
+      languageCode: "en"
+    },
+    {
+      language: "Spanish",
+      languageCode: "es"
+    },
+    {
+      language: "French",
+      languageCode: "fr"
+    },
+    {
+      language: "Italian",
+      languageCode: "it"
+    },
+    {
+      language: "German",
+      languageCode: "de"
+    },
+    {
+      language: "Portuguese",
+      languageCode: "pt"
+    }
+  ];
 
   // This function is used to retrieve the value in the user_id cookie set during log in
   function getCookie(cookieName)
@@ -26,7 +57,9 @@ $(document).ready(function()
   // This function retrieves all of the previous translations for a logged in user
   function getTranslationHistory(user)
   { 
-    $.ajax(
+    if(getCookie("user_id") != "")
+    {
+      $.ajax(
       {
         method: "GET",
         url: relativeURL + "/translations",
@@ -54,8 +87,9 @@ $(document).ready(function()
           deleteButton.attr(
           {
             "type": "submit",
-            "class": "btn btn-primary",
-            "value": "Delete"
+            "class": "btn btn-primary del-btn",
+            "value": "Delete",
+            "id": data[i].id
           });
           
           deleteButton.text("Delete");
@@ -69,244 +103,277 @@ $(document).ready(function()
           $("#a-keywords").append(analyzedKeywordsDiv);
           $("#t-keywords").append(transKeywordsDiv);
           $("#delete-button").append(deleteButtonDiv);
-
         }
+      });
+    }
 
+    // Hides the translation history container if the user is not logged (or anonymous)
+    else
+    {
+      $("#translation-history-container").hide();
+    }
+  }
+
+  // Function to add recent translation to translation history
+  function addTranslation(user, language, keywords, translatedKeywords)
+  {
+
+    $.ajax(
+    {
+      method: "POST",
+      url: relativeURL + "/translations",
+      data:
+      {
+        "user_id": user,
+        "translated_language": language,
+        "analyzed_keywords": keywords.join(", "),
+        "translated_keywords": translatedKeywords.join(", "),
+      }
+    }).done(function(data)
+    {
+      console.log("Translation added to translation history!");
+      
+      $("#t-language").empty();
+      $("#a-keywords").empty();
+      $("#t-keywords").empty();
+      $("#delete-button").empty();
+
+      getTranslationHistory(getCookie("user_id"));
+    });
+  }
+
+  // Function to delete translations from a user's translation history
+  function deleteTranslation(user, translation)
+  {
+    $.ajax(
+    {
+      method: "PUT",
+      url: relativeURL + "/translations",
+      data:
+      {
+        translation_id: translation,
+        user_id: user
+      }
+    }).done(function(data)
+    {
+      console.log("Translation has been deleted.");
+    });
+  }
+
+  // Function to detect labels or keywords in uploaded image (AWS Rekognition API)
+  function DetectLabels(imageData) {
+
+      // Sets the AWS for authentication
+      AWS.region = "us-east-2";
+
+      // Creates the AWS Rekognition object which will be used to analyze the image
+      var rekognition = new AWS.Rekognition();
+
+      // Creates the parameters for invoking the Rekognition API and sets them to a variable in the form of an object
+      var rekognitionParams = 
+      {
+        Image: {
+          // This is the image after it has been transformed into bytes which can be analyzed by AWS Rekognition
+          Bytes: imageData
+        },
+        MaxLabels: 5,
+      };
+
+      // Thie invokes the AWS Rekognition detectLabels Action using the rekognition object we created above
+      rekognition.detectLabels(rekognitionParams, function (err, data) {
+          // Conditional which checks to see if an error is returned; if an error is returned, the error is logged in the console
+          if (err) console.log(err, err.stack); // an error occurred
+        
+          else
+          {
+          
+              keywords = [];
+
+                // For loop that iterates for each label/keyword that is returned in the AWS Rekognition API response
+              for (var i = 0; i < data.Labels.length; i++)
+              {
+                  
+                  var text = data.Labels[i].Name;
+
+                  keywords.push(text);
+
+              }
+
+              translateWords(keywords.toString());
+          }
       });
   }
 
-    var keywords = [];
-    var translatedKeywords = [];
-    var sourceLanguage = "";
-    var targetLanguage = "";
+  //TESTING OUT ADDING IN OTHER LANGUAGES
+  function translateWords(text) {
+      AnonLog();
 
-    var languages = [
-      {
-        language: "English",
-        languageCode: "en"
-      },
-      {
-        language: "Spanish",
-        languageCode: "es"
-      },
-      {
-        language: "French",
-        languageCode: "fr"
-      },
-      {
-        language: "Italian",
-        languageCode: "it"
-      },
-      {
-        language: "German",
-        languageCode: "de"
-      },
-      {
-        language: "Portuguese",
-        languageCode: "pt"
-      }
-    ];
+      var translate = new AWS.Translate({region: AWS.config.region});
+      var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+      var targetDropDownText = targetDropdown.options[targetDropdown.selectedIndex].text;
+      
+      console.log("Dropdown Picker: " + targetDropdown);
+      var targetLanguageCode = "";
 
-    // Function to detect labels or keywords in uploaded image (AWS Rekognition API)
-    function DetectLabels(imageData) {
-
-        // Sets the AWS for authentication
-        AWS.region = "us-east-2";
-
-        // Creates the AWS Rekognition object which will be used to analyze the image
-        var rekognition = new AWS.Rekognition();
-
-        // Creates the parameters for invoking the Rekognition API and sets them to a variable in the form of an object
-        var rekognitionParams = 
+      for (i = 0; i < languages.length; i++)
+      { 
+        if (languages[i].language == targetDropDownText)
         {
-          Image: {
-            // This is the image after it has been transformed into bytes which can be analyzed by AWS Rekognition
-            Bytes: imageData
-          },
-          MaxLabels: 5,
-        };
+          targetLanguageCode = languages[i].languageCode;
+          console.log("Target Language Code: " + targetLanguageCode);
+        }      
+      }
 
-        // Thie invokes the AWS Rekognition detectLabels Action using the rekognition object we created above
-        rekognition.detectLabels(rekognitionParams, function (err, data) {
-            // Conditional which checks to see if an error is returned; if an error is returned, the error is logged in the console
-            if (err) console.log(err, err.stack); // an error occurred
-          
-            else
-            {
-            
-                keywords = [];
+      var translateParams = {
+          Text: text,
+          SourceLanguageCode: "en",
+          TargetLanguageCode: targetLanguageCode
+      };
 
-                 // For loop that iterates for each label/keyword that is returned in the AWS Rekognition API response
-                for (var i = 0; i < data.Labels.length; i++)
-                {
-                    
-                    var text = data.Labels[i].Name;
+      translate.translateText(translateParams, function(err, data) {
+          if (err) {
+              console.log(err, err.stack);
 
-                    keywords.push(text);
+          }
+          if (data) {
+              translatedKeywords = data.TranslatedText.split(", ");
+              
+              console.log("Source Language Code: " + data.SourceLanguageCode);
+              console.log("Target Language Code: " + data.TargetLanguageCode);
+              console.log("Keywords Array: " + keywords);
+              console.log(keywords);
+              console.log("Translated Keywords Array: " + translatedKeywords);
+              console.log(translatedKeywords);
 
-                }
+              // Creates jQuery DOM elements for Keywords and Translations
+              var keywordsDiv = $("<div>");
+              var translationDiv = $("<div>");
+              var keywordsP = $("<p>");
+              var translationP = $("<p>");
 
-                translateWords(keywords.toString());
-            }
-        });
-    }
+              // Resets the Keywords container in DOM and then retrieves the keywords returned from AWS Rekognition
+              $("#keywords").empty();
+              for (i = 0; i < keywords.length; i++)
+              {
+                $(keywordsP).append(keywords[i]);
+                $(keywordsDiv).append(keywordsP);
+                keywordsP = $("<p>");
+              }
 
-    //TESTING OUT ADDING IN OTHER LANGUAGES
-    function translateWords(text) {
-        AnonLog();
+              // Resets the Translations container in DOM and then retrieves the translated keywords returned from AWS Translate
+              $("#translation").empty();
+              for (i = 0; i < translatedKeywords.length; i++)
+              {
+                $(translationP).append(translatedKeywords[i]);
+                $(translationDiv).append(translationP);
+                translationP = $("<p>");
+              }
 
-        var translate = new AWS.Translate({region: AWS.config.region});
-        var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
-        var targetDropDownText = targetDropdown.options[targetDropdown.selectedIndex].text;
+              // Updates the DOM with new containers for Keywords and Translations
+              $("#keywords").html(keywordsDiv);
+              $("#translation").html(translationDiv);
+
+              // Checks to see if a cookie has been sent for user_id
+              // If no cookie is set, then the user_id is set to anonymous for the translation in the database
+              if (getCookie("user_id") == "")
+              {
+                addTranslation("Anonymous", targetDropDownText, keywords, translatedKeywords);
+              }
+              
+              // If a cookie is set, then the user_id us set to that cookie value for the translation in the database 
+              else
+              {
+                addTranslation(getCookie("user_id"), targetDropDownText, keywords, translatedKeywords);
+              }
+          }
+          });
+  }
+
+  // Function to convert image to a file/bytes that can be processed by AWS Rekognition API
+  function ProcessImage()
+  {
+    // Invokes function to authenticate securely to AWS so that the AWS APIs can be invoked
+    AnonLog();
+
+    // Creating an object to store the HTML element which the image resides
+    var control = document.getElementById("fileToUpload");
+    console.log(control);
+    
+    // Creating an object to store the actual image
+    var file = control.files[0];
+    console.log(file);
+
+    // Load base64 encoded image 
+    // FileRead is a vanilla JavaScript method to read/manage files include images
+    var reader = new FileReader();
+
+    // Reads the file when it is loaded/selected by the user in the DOM
+    reader.onload = (function (theFile)
+    {
+      return function (e) {
+        var img = document.createElement('img');
+        var image = null;
+        // Points the FileReader function to the image where is stored
+        img.src = e.target.result;
+        var jpg = true;
         
-        console.log("Dropdown Picker: " + targetDropdown);
-        var targetLanguageCode = "";
-
-        for (i = 0; i < languages.length; i++)
-        { 
-          if (languages[i].language == targetDropDownText)
-          {
-            targetLanguageCode = languages[i].languageCode;
-            console.log("Target Language Code: " + targetLanguageCode);
-          }      
+        //Loads the image if image base64 encoded
+        try 
+        {
+          image = atob(e.target.result.split("data:image/jpeg;base64,")[1]);
+        
+        // Catching an error if the image is a not a JPG file and setting a jpg variavle to be read later
+        } catch (e) 
+        {
+          jpg = false;
         }
 
-        var translateParams = {
-            Text: text,
-            SourceLanguageCode: "en",
-            TargetLanguageCode: targetLanguageCode
-        };
+        // Tries to read image again and then returns an error indicating that the image is not in the correct format
+        if (jpg == false) 
+        {
+          try {
+            image = atob(e.target.result.split("data:image/png;base64,")[1]);
+          } catch (e) {
+            console.log("Not an image file Rekognition can process");
+            return;
+          }
+        }
 
-        translate.translateText(translateParams, function(err, data) {
-            if (err) {
-                console.log(err, err.stack);
+        // Unencode image bytes for AWS Rekognition DetectLabels API 
+        var length = image.length;
 
-            }
-            if (data) {
-                translatedKeywords = data.TranslatedText.split(", ");
-                
-                console.log("Source Language Code: " + data.SourceLanguageCode);
-                console.log("Target Language Code: " + data.TargetLanguageCode);
-                console.log("Keywords Array: " + keywords);
-                console.log(keywords);
-                console.log("Translated Keywords Array: " + translatedKeywords);
-                console.log(translatedKeywords);
+        // Vanilla JavaScript method for storing files and other type arrays
+        imageBytes = new ArrayBuffer(length);
 
-                // Creates jQuery DOM elements for Keywords and Translations
-                var keywordsDiv = $("<div>");
-                var translationDiv = $("<div>");
-                var keywordsP = $("<p>");
-                var translationP = $("<p>");
+        // Turns it into an array of integer values
+        var ua = new Uint8Array(imageBytes);
+        for (var i = 0; i < length; i++) {
+          ua[i] = image.charCodeAt(i);
+        }
 
-                // Resets the Keywords container in DOM and then retrieves the keywords returned from AWS Rekognition
-                $("#keywords").empty();
-                for (i = 0; i < keywords.length; i++)
-                {
-                  $(keywordsP).append(keywords[i]);
-                  $(keywordsDiv).append(keywordsP);
-                  keywordsP = $("<p>");
-                }
+        //Call Rekognition  
+        DetectLabels(imageBytes);
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  }
 
-                // Resets the Translations container in DOM and then retrieves the translated keywords returned from AWS Translate
-                $("#translation").empty();
-                for (i = 0; i < translatedKeywords.length; i++)
-                {
-                  $(translationP).append(translatedKeywords[i]);
-                  $(translationDiv).append(translationP);
-                  translationP = $("<p>");
-                }
-
-                // Updates the DOM with new containers for Keywords and Translations
-                $("#keywords").html(keywordsDiv);
-                $("#translation").html(translationDiv);
-
-            }
-            });
-    }
-
-      // Function to convert image to a file/bytes that can be processed by AWS Rekognition API
-      function ProcessImage() {
-        // Invokes function to authenticate securely to AWS so that the AWS APIs can be invoked
-        AnonLog();
-    
-        // Creating an object to store the HTML element which the image resides
-        var control = document.getElementById("fileToUpload");
-        console.log(control);
-        
-        // Creating an object to store the actual image
-        var file = control.files[0];
-        console.log(file);
-    
-        // Load base64 encoded image 
-        // FileRead is a vanilla JavaScript method to read/manage files include images
-        var reader = new FileReader();
-
-        // Reads the file when it is loaded/selected by the user in the DOM
-        reader.onload = (function (theFile) {
-          return function (e) {
-            var img = document.createElement('img');
-            var image = null;
-            // Points the FileReader function to the image where is stored
-            img.src = e.target.result;
-            var jpg = true;
-            
-            //Loads the image if image base64 encoded
-            try {
-              image = atob(e.target.result.split("data:image/jpeg;base64,")[1]);
-            
-            // Catching an error if the image is a not a JPG file and setting a jpg variavle to be read later
-            } catch (e) {
-              jpg = false;
-            }
-
-            // Tries to read image again and then returns an error indicating that the image is not in the correct format
-            if (jpg == false) {
-              try {
-                image = atob(e.target.result.split("data:image/png;base64,")[1]);
-              } catch (e) {
-                console.log("Not an image file Rekognition can process");
-                return;
-              }
-            }
-
-            // Unencode image bytes for AWS Rekognition DetectLabels API 
-            var length = image.length;
-
-            // Vanilla JavaScript method for storing files and other type arrays
-            imageBytes = new ArrayBuffer(length);
-
-            // Turns it into an array of integer values
-            var ua = new Uint8Array(imageBytes);
-            for (var i = 0; i < length; i++) {
-              ua[i] = image.charCodeAt(i);
-            }
-    
-            //Call Rekognition  
-            DetectLabels(imageBytes);
-          };
-        })(file);
-        reader.readAsDataURL(file);
-      }
-
-      function AnonLog() {
-        // Configure the credentials provider to use your identity pool
-        AWS.config.region = 'us-east-2'; // Region
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: 'us-east-2:7359eb59-58a3-4653-98f7-8e4d06680409',
-        });
-        // Make the call to obtain credentials
-        AWS.config.credentials.get(function () {
-          // Credentials will be available when this function is called.
-          var accessKeyId = AWS.config.credentials.accessKeyId;
-          var secretAccessKey = AWS.config.credentials.secretAccessKey;
-          var sessionToken = AWS.config.credentials.sessionToken;
-        });
-    }
-
-    $(document).on('change','#fileToUpload' , function()
-    { 
-        ProcessImage();
+  function AnonLog()
+  {
+    // Configure the credentials provider to use your identity pool
+    AWS.config.region = 'us-east-2'; // Region
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: 'us-east-2:7359eb59-58a3-4653-98f7-8e4d06680409',
     });
+    
+    // Make the call to obtain credentials
+    AWS.config.credentials.get(function () {
+      // Credentials will be available when this function is called.
+      var accessKeyId = AWS.config.credentials.accessKeyId;
+      var secretAccessKey = AWS.config.credentials.secretAccessKey;
+      var sessionToken = AWS.config.credentials.sessionToken;
+    });
+  }
 
 //js for dropdown function.... building from scratch, not using bootstrap
   function myFunction() {
@@ -339,33 +406,59 @@ $(document).ready(function()
     };
     };
 
-      $("#fileToUpload").change(function(){
+  // jQuery listener on the the image uploader button; invokes the ProcessImage() function when an image path is provided
+  $(document).on('change','#fileToUpload' , function()
+  { 
+      ProcessImage();
+  });
+
+  $("#fileToUpload").change(function()
+  {
     readURL(this);
-      });
+  });
+
+  // Popper.js scripting
+  var lang = document.getElementById("lang");
+  var langPopUp = document.getElementById("pop-up");
+  //langPopUp.hide();
+
+  $(lang).mouseover(function(){
+  $(langPopUp).show();
+    var popper = new Popper(lang, langPopUp, {
+      placement: "bottom"
+    })
+  });
+  var imgCard = document.getElementById("img-selector");
+  var imgPopUp = document.getElementById("img-popup");
 
 
-      var lang = document.getElementById("lang");
-      var langPopUp = document.getElementById("pop-up");
-      //langPopUp.hide();
-
-      $(lang).mouseover(function(){
-      $(langPopUp).show();
-        var popper = new Popper(lang, langPopUp, {
-          placement: "bottom"
-        })
-      });
-      var imgCard = document.getElementById("img-selector");
-      var imgPopUp = document.getElementById("img-popup");
-  
-
-      $(imgCard).mouseover(function(){
-      $(imgPopUp).show();
-        var popper = new Popper(imgCard, imgPopUp, {
-          placement: "bottom"            
-          
-        });
-      });
+  $(imgCard).mouseover(function(){
+  $(imgPopUp).show();
+    var popper = new Popper(imgCard, imgPopUp, {
+      placement: "bottom"            
+      
+    });
+  });
  
+  // Invocation of getTranslationHistory function when page loads
+  getTranslationHistory(getCookie("user_id"));
+
+  // jQuery listener to delete translation in translation history 
+  $("#delete-button").on("click", ".del-btn", function()
+  { 
+    event.preventDefault();
+    
+    // Deletes the translation associated with the delete button clicked
+    deleteTranslation(getCookie("user_id"), parseInt($(this).attr("id")));
+
+    // Clears translation history container so that it can be refreshed after deletion
+    $("#t-language").empty();
+    $("#a-keywords").empty();
+    $("#t-keywords").empty();
+    $("#delete-button").empty();
+
+    // Refreshes translation history container after deletion
     getTranslationHistory(getCookie("user_id"));
   });
+});
    
