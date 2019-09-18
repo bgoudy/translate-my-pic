@@ -1,36 +1,40 @@
 // Required dependencies and packages
 var db = require("../models");
+var bcrypt = require("bcrypt");
 
-// Routes
 // Creates a new user record in the Users database
 exports.createUser = function (req, res)
 {
-    db.User.create(
+    bcrypt.hash(req.body.password, 10, function(err, hash)
     {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: req.body.password
-    }).then(function(dbTranslate)
-    {
-        if(dbTranslate.id =! null)
+        db.User.create(
         {
-            res.json(
-            {
-                "Code": 200,
-                "Message": "Account creation successful.",
-                "Token": dbTranslate.id
-            });
-        }
-        else
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            password: hash
+        }).then(function(dbTranslate)
         {
-            res.json(
+            if(dbTranslate.id =! null)
             {
-                "Code": 401,
-                "Message": "Incorrect email or password."
-            });
-        }
-    })
+                res.json(
+                {
+                    "Code": 200,
+                    "Message": "Account creation successful.",
+                    "Token": dbTranslate.id,
+                    "Hash": hash
+                });
+            }
+            else
+            {
+                res.json(
+                {
+                    "Code": 401,
+                    "Message": "Error creating new user."
+                });
+            }
+        });
+    });
 };
 
 // Authenticates a user during the log in process by comparing the username and password provided in the request
@@ -41,25 +45,40 @@ exports.authUser = function (req, res)
         where:
         {
             email: req.query.email,
-            password: req.query.password
         }
     }).then(function(dbTranslate)
     {
-        if(dbTranslate == null)
+        hash = dbTranslate.password;
+        
+        if(dbTranslate != null)
         {
-            res.json(
+            bcrypt.compare(req.query.password, hash, function(error, response)
             {
-                "Code": 401,
-                "Message": "Incorrect email or password."
+                if(response)
+                {
+                    res.json(
+                    {
+                        "Code": 200,
+                        "Message": "Authentication successful.",
+                        "Token": dbTranslate.id
+                    });
+                }
+                else
+                {
+                    db.res.json(
+                    {
+                        "Code": 401,
+                        "Message": "Incorrect email address or password."
+                    });
+                } 
             });
         }
         else
         {
             res.json(
             {
-                "Code": 200,
-                "Message": "Authentication successful.",
-                "Token": dbTranslate.id
+                "Code": 401,
+                "Message": "Incorrect email address or password."
             });
         }
     });

@@ -6,6 +6,7 @@ $(document).ready(function()
     var lastName = "";
     var userEmail = "";
     var userPassword = "";
+    var hashedPassword = "";
     
     // Sets the relative URL of the current window for API calls
     var relativeURL = window.location.origin;
