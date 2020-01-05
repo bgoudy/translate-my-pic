@@ -1,2 +1,2 @@
-# translate-my-pic
-Project 1 
+# translate-my-pic-plus
+Project 2 
